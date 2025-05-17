@@ -9,7 +9,6 @@ pipeline {
     }
     stage('Install Dependencies') {
       steps {
-        //sh 'npm install'
         bat 'npm install' // For Windows compatibility
       }
     }
@@ -19,8 +18,7 @@ pipeline {
             bat 'snyk auth %SNYK_TOKEN%'
             bat 'npm test || exit /B 0'
         }
-        //bat 'npm test || exit /B 0' // For Windows compatibility
-        //sh 'npm test || true' // Unix - Allows pipeline to continue despite test failures
+        
       }
     }
     stage('Generate Coverage Report') {
@@ -42,8 +40,7 @@ pipeline {
         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
             bat 'sonar-scanner -Dsonar.token=%SONAR_TOKEN%'
         }
-        //bat 'npm test || exit /B 0' // For Windows compatibility
-        //sh 'npm test || true' // Unix - Allows pipeline to continue despite test failures
+    
       }
     }
   }
