@@ -14,10 +14,13 @@ pipeline {
           def dockerImageName = 'ruthfaith/nodejs-express-app:latest'
           
           echo "Building Docker image: ${dockerImageName}"
-          docker build -t "${dockerImageName}" .
+          bat "docker build -t '${dockerImageName}' ."
 
-          echo "Pushing Docker image: ${dockerImageName}"
-          docker push "${dockerImageName}"
+          withCredentials([string(credentialsId: 'dockerhub-push-token', variable: 'DOCKER_HUB_TOKEN')]) {
+            bat "docker login -u ruthfaith -p '${DOCKER_HUB_TOKEN}'"
+            echo "Pushing Docker image: ${dockerImageName}"
+            bat "docker push '${dockerImageName}'"
+          }
 
         }
       }
