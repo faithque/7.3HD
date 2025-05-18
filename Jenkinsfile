@@ -86,7 +86,8 @@ pipeline {
     stage('Release') {
       steps {
         input message: 'Release?', ok: 'Release'
-        bat 'npm run release'
+        // bat 'npm run release'
+        echo 'Release logic goes here'
       }
     }
     stage('Monitoring and Alerts') {
