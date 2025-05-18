@@ -54,12 +54,35 @@ pipeline {
     
       }
     }
-    stage('Deploy to Production') {
+    stage('Deploy to Test Environment (Docker)') {
       steps {
-        input message: 'Deploy to production?', ok: 'Deploy'
-        bat 'npm run deploy'
+          input message: 'Deploy to the test environment?', ok: 'Deploy'
+          script {
+              echo "Deploying Docker image (ruthfaith/nodejs-express-app:latest) to a local Docker container (Windows)"
+
+              // Define the name for your local Docker container
+              def containerName = 'nodejs-express-app'
+
+              // Stop and remove any existing container with the same name
+              try {
+                  bat "docker stop ${containerName}"
+              } catch (Exception e) {
+                  echo "No running container named '${containerName}' found."
+              }
+              try {
+                  bat "docker rm ${containerName}"
+              } catch (Exception e) {
+                  echo "No stopped container named '${containerName}' found."
+              }
+
+              // Run the Docker container with appropriate configurations
+              bat "docker run -d --name ${containerName} -p 8080:8080 ruthfaith/nodejs-express-app:latest"
+
+              echo "Docker container '${containerName}' is running with image: ruthfaith/nodejs-express-app:latest"
+              echo "Your application should be accessible at http://localhost:8080."
+          }
       }
-    }
+  }
     stage('Release') {
       steps {
         input message: 'Release?', ok: 'Release'
