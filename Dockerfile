@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /project
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -17,11 +17,11 @@ COPY . .
 FROM node:18-alpine
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /project
 
 # Copy only the necessary files from the builder stage
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/. .
+COPY --from=builder /project/node_modules ./node_modules
+COPY --from=builder /project/. .
 # COPY --from=builder /app/build ./ # If you have a build step
 
 # Expose the port your Express app listens on (default is often 3000)
