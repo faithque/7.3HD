@@ -13,16 +13,14 @@ pipeline {
           // Dockerfile in project root directory
           def dockerImageName = 'ruthfaith/nodejs-express-app:latest'
           
-            echo "Building Docker image: ${dockerImageName}"
-            docker build -t "${dockerImageName}" .
+          echo "Building Docker image: ${dockerImageName}"
+          docker build -t "${dockerImageName}" .
 
-            echo "Pushing Docker image: ${dockerImageName}"
-            docker push "${dockerImageName}"
+          echo "Pushing Docker image: ${dockerImageName}"
+          docker push "${dockerImageName}"
 
-                    // Store the image name for later use
-                    env.DOCKER_IMAGE = dockerImageName
-                }
-            }
+        }
+      }
     }
     stage('Run Tests') {
       steps {
