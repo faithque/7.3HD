@@ -76,10 +76,10 @@ pipeline {
               }
 
               // Run the Docker container with appropriate configurations
-              bat "docker run -d --name ${containerName} -p 3000:8080 ruthfaith/nodejs-express-app:latest"
+              bat "docker run -d --name ${containerName} -p 3000:8081 ruthfaith/nodejs-express-app:latest"
 
               echo "Docker container '${containerName}' is running with image: ruthfaith/nodejs-express-app:latest"
-              echo "Your application should be accessible at http://localhost:8080."
+              echo "Your application should be accessible at http://localhost:8081."
           }
       }
   }
