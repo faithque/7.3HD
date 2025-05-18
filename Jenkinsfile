@@ -4,13 +4,25 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'master', url: ' https://github.com/faithque/7.3HD.git'
+        git branch: 'master', url: 'https://github.com/faithque/7.3HD.git'
       }
     }
-    stage('Install Dependencies') {
+    stage('Build') {
       steps {
-        bat 'npm install' // For Windows compatibility
-      }
+        script {
+          // Dockerfile in project root directory
+          def dockerImageName = 'ruthfaith/nodejs-express-app:latest'
+          
+                    echo "Building Docker image: ${dockerImageName}"
+                    docker build -t "${dockerImageName}" .
+
+                    echo "Pushing Docker image: ${dockerImageName}"
+                    docker push "${dockerImageName}"
+
+                    // Store the image name for later use
+                    env.DOCKER_IMAGE = dockerImageName
+                }
+            }
     }
     stage('Run Tests') {
       steps {
@@ -25,13 +37,11 @@ pipeline {
       steps {
         // Ensure coverage report exists
         bat 'npm run coverage || exit /B 0'
-        //sh 'npm run coverage || true'
       }
     }
     stage('NPM Audit (Security Scan)') {
       steps {
         bat 'npm audit || exit /B 0'
-        //sh 'npm audit || true' // This will show known CVEs in the output
       }
     }
     
@@ -41,6 +51,26 @@ pipeline {
             bat 'sonar-scanner -Dsonar.token=%SONAR_TOKEN%'
         }
     
+      }
+    }
+    stage('Deploy to Production') {
+      steps {
+        input message: 'Deploy to production?', ok: 'Deploy'
+        bat 'npm run deploy'
+      }
+    }
+    stage('Release') {
+      steps {
+        input message: 'Release?', ok: 'Release'
+        bat 'npm run release'
+      }
+    }
+    stage('Monitoring and Alerts') {
+      steps {
+        script {
+          // Add your monitoring and alerting logic here
+          echo 'Monitoring and alerting logic goes here'
+        }
       }
     }
   }

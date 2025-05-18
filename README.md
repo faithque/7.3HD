@@ -1,5 +1,5 @@
-# Node Web Application boilerplate
-![GitHub license](https://img.shields.io/github/license/mangya/node-express-mysql-boilerplate) ![GitHub repo size](https://img.shields.io/github/repo-size/mangya/node-express-mysql-boilerplate) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f93d658ad094f228e4b821af3654fe7)](https://app.codacy.com/gh/mangya/node-express-mysql-boilerplate/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+# Ruth Faith Wandabwa's Capstone project
+SIT753
 
 A boilerplate for **Node.js** web applications. This boilerplate gives the basic stucture of application start with while bundling enough useful features so as to remove all those redundant tasks that can derail a project before it even really gets started. This boilerplate users Express with sequelize as ORM and MySQL as database.
 
@@ -11,8 +11,8 @@ A boilerplate for **Node.js** web applications. This boilerplate gives the basic
 
 ### Quick start
 
-1. Clone the repository with `git clone https://github.com/mangya/node-express-mysql-boilerplate.git <your_project_folder_name>`
-2. Change directory to your project folder `cd <your_project_folder_name>`
+1. Clone the repository with `git clone https://github.com/faithque/7.3HD.git`
+2. Change directory to your project folder `cd 7.3HD`
 3. Install the dependencies with `npm install`
 4. Create database in MySQL.
 5. Update the your database name and credentials in the `.env` file.
@@ -59,4 +59,4 @@ A boilerplate for **Node.js** web applications. This boilerplate gives the basic
 
 ## Contributing
 
-This boilerplate is open to suggestions and contributions, documentation contributions are also welcome! 😊
+This project is open to suggestions and contributions, documentation contributions are also welcome! 😊
