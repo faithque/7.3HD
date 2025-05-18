@@ -21,8 +21,7 @@ WORKDIR /project
 
 # Copy only the necessary files from the builder stage
 COPY --from=builder /project/node_modules ./node_modules
-COPY --from=builder /project/. .
-COPY --from=builder /project/build ./ 
+COPY --from=builder /project/. . 
 
 # Expose the port your Express app listens on (default is often 3000)
 EXPOSE 3000
