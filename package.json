@@ -24,7 +24,7 @@
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
     "mysql2": "^3.11.3",
-    "sequelize": "^6.37.5",
+    "sequelize": "^6.37.7",
     "validator": "^13.12.0"
   }
 }
